@@ -3,7 +3,6 @@ import 'package:bookia_app/core/functions/navigation.dart';
 import 'package:bookia_app/core/utils/colors.dart';
 import 'package:bookia_app/core/utils/text_style.dart';
 import 'package:bookia_app/core/widgets/custom_button.dart';
-import 'package:bookia_app/features/auth/presentation/views/login/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -13,11 +12,13 @@ class AcceptView extends StatelessWidget {
   final String bodyText;
   final String buttonText;
   final Widget nextPage;
-    const AcceptView(
-      {super.key,
-      required this.titleText,
-      required this.bodyText,
-      required this.buttonText, required this.nextPage, });
+  const AcceptView({
+    super.key,
+    required this.titleText,
+    required this.bodyText,
+    required this.buttonText,
+    required this.nextPage,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -51,7 +51,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               BottomNavigationBarItem(
                   icon: SvgPicture.asset(AssetsIcons.cartSvg),
                   activeIcon: SvgPicture.asset(
-                    AssetsIcons.homeSvg,
+                    AssetsIcons.cartSvg,
                     colorFilter: ColorFilter.mode(
                         AppColors.primaryColor, BlendMode.srcIn),
                   ),

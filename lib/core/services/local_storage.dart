@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalStorage {
+  static String token = "token";
 
   static late SharedPreferences _sharedPreferences;
 
@@ -22,7 +23,7 @@ class AppLocalStorage {
     }
   }
 
-  static dynamic getData({required String key}) {
+  static dynamic getCachData({required String key}) {
     return _sharedPreferences.get(key);
   }
 }

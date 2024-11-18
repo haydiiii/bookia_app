@@ -10,6 +10,7 @@ import 'package:bookia_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:bookia_app/features/auth/presentation/bloc/auth_events.dart';
 import 'package:bookia_app/features/auth/presentation/bloc/auth_states.dart';
 import 'package:bookia_app/features/auth/presentation/views/login/widget/forget_password.dart';
+import 'package:bookia_app/features/auth/presentation/views/register/register_view.dart';
 import 'package:bookia_app/features/auth/presentation/widget/button_social.dart';
 import 'package:bookia_app/features/auth/presentation/widget/or_divider_widget.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class _LoginViewState extends State<LoginView> {
   var formKey = GlobalKey<FormState>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthStates>(
@@ -46,11 +48,12 @@ class _LoginViewState extends State<LoginView> {
             title:
                 IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
           ),
-          body: Padding(
+          body: SingleChildScrollView(
             padding: const EdgeInsets.all(15),
             child: Form(
               key: formKey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Welcome back! Glad to see you, Again!',
@@ -101,7 +104,7 @@ class _LoginViewState extends State<LoginView> {
                         onPressed: () {
                           push(context, ForgetPasswordView());
                         },
-                      )
+                      ),
                     ],
                   ),
                   Gap(15),
@@ -137,7 +140,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  Gap(30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -146,14 +149,16 @@ class _LoginViewState extends State<LoginView> {
                         style: getSmallTextStyle(context),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            pushReplacement(context, RegisterView());
+                          },
                           child: Text(
-                            'RegisterNow',
+                            'Register Now',
                             style: getSmallTextStyle(context,
                                 color: AppColors.primaryColor),
-                          ))
+                          )),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),

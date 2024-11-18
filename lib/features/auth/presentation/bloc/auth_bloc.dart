@@ -1,4 +1,4 @@
-import 'package:bookia_app/features/auth/data/model/request/register_model_params.dart';
+import 'package:bookia_app/core/services/local_storage.dart';
 import 'package:bookia_app/features/auth/data/repo/auth_repo.dart';
 import 'package:bookia_app/features/auth/presentation/bloc/auth_events.dart';
 import 'package:bookia_app/features/auth/presentation/bloc/auth_states.dart';
@@ -10,10 +10,12 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
     on<RegisterEvent>(register);
   }
 
-  Future <void>login(LoginEvent event, Emitter<AuthStates> emit) async{
+  Future<void> login(LoginEvent event, Emitter<AuthStates> emit) async {
     emit(LoginLoadingStates());
-   await AuthRepo.login(event.params).then((value) {
-      if (value) {
+    await AuthRepo.login(event.params).then((value) {
+      if (value != null) {
+        AppLocalStorage.cacheData(
+            key: AppLocalStorage.token, value: value.data?.token);
         emit(LoginSuccessStates());
       } else {
         emit(LoginErrorStates(
@@ -22,10 +24,13 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
       }
     });
   }
- Future<void> register(RegisterEvent event, Emitter<AuthStates> emit)async {
+
+  Future<void> register(RegisterEvent event, Emitter<AuthStates> emit) async {
     emit(RegisterLoadingStates());
- await   AuthRepo.register(event.params).then((value) {
-      if (value) {
+    await AuthRepo.register(event.params).then((value) {
+      if (value != null) {
+        AppLocalStorage.cacheData(
+            key: AppLocalStorage.token, value: value.data?.token);
         emit(RegisterSuccessStates());
       } else {
         emit(RegisterErrorStates(
@@ -33,6 +38,5 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
         ));
       }
     });
-
   }
 }

@@ -11,7 +11,6 @@ class LoginErrorStates extends AuthStates {
   LoginErrorStates(this.error);
 }
 
-
 class RegisterLoadingStates extends AuthStates {}
 
 class RegisterSuccessStates extends AuthStates {}

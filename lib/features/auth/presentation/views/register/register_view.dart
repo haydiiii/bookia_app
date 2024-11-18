@@ -9,6 +9,7 @@ import 'package:bookia_app/features/auth/data/model/request/register_model_param
 import 'package:bookia_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:bookia_app/features/auth/presentation/bloc/auth_events.dart';
 import 'package:bookia_app/features/auth/presentation/bloc/auth_states.dart';
+import 'package:bookia_app/features/auth/presentation/views/login/login_view.dart';
 import 'package:bookia_app/features/auth/presentation/widget/button_social.dart';
 import 'package:bookia_app/features/auth/presentation/widget/or_divider_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class _RegisterViewState extends State<RegisterView> {
   var emailController = TextEditingController();
   var nameController = TextEditingController();
   var confirmPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthStates>(
@@ -44,14 +46,17 @@ class _RegisterViewState extends State<RegisterView> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             centerTitle: false,
-            title:
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+            title: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_back_ios),
+            ),
           ),
-          body: Padding(
+          body: SingleChildScrollView(
             padding: const EdgeInsets.all(15),
             child: Form(
               key: formKey,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Hello! Register to get started',
@@ -68,9 +73,10 @@ class _RegisterViewState extends State<RegisterView> {
                       }
                     },
                     decoration: InputDecoration(
-                        hintText: 'UserName',
-                        hintStyle: getSmallTextStyle(context,
-                            color: AppColors.greyColor)),
+                      hintText: 'UserName',
+                      hintStyle: getSmallTextStyle(context,
+                          color: AppColors.greyColor),
+                    ),
                   ),
                   Gap(15),
                   TextFormField(
@@ -83,9 +89,10 @@ class _RegisterViewState extends State<RegisterView> {
                       }
                     },
                     decoration: InputDecoration(
-                        hintText: 'Email',
-                        hintStyle: getSmallTextStyle(context,
-                            color: AppColors.greyColor)),
+                      hintText: 'Email',
+                      hintStyle: getSmallTextStyle(context,
+                          color: AppColors.greyColor),
+                    ),
                   ),
                   Gap(15),
                   TextFormField(
@@ -98,35 +105,40 @@ class _RegisterViewState extends State<RegisterView> {
                       }
                     },
                     decoration: InputDecoration(
-                        suffixIcon: SvgPicture.asset(
-                          AssetsIcons.eyeSvg,
-                        ),
-                        hintText: ' Password',
-                        hintStyle: getSmallTextStyle(context,
-                            color: AppColors.greyColor)),
+                      suffixIcon: SvgPicture.asset(
+                        AssetsIcons.eyeSvg,
+                      ),
+                      hintText: 'Password',
+                      hintStyle: getSmallTextStyle(context,
+                          color: AppColors.greyColor),
+                    ),
                   ),
                   Gap(15),
                   TextFormField(
                     controller: confirmPasswordController,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please enter your confirm password';
-                      } else {
-                        return null;
+                        return 'Please confirm your password';
+                      } else if (value != passwordController.text) {
+                        return 'Passwords do not match';
                       }
+                      return null;
                     },
                     decoration: InputDecoration(
-                        suffixIcon: SvgPicture.asset(
-                          AssetsIcons.eyeSvg,
-                        ),
-                        hintText: ' Confirm Password',
-                        hintStyle: getSmallTextStyle(context,
-                            color: AppColors.greyColor)),
+                      suffixIcon: SvgPicture.asset(
+                        AssetsIcons.eyeSvg,
+                      ),
+                      hintText: 'Confirm Password',
+                      hintStyle: getSmallTextStyle(context,
+                          color: AppColors.greyColor),
+                    ),
                   ),
                   Gap(15),
                   (state is RegisterLoadingStates)
-                      ? CircularProgressIndicator(
-                          color: AppColors.primaryColor,
+                      ? Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor,
+                          ),
                         )
                       : CustomButton(
                           color: AppColors.primaryColor,
@@ -134,13 +146,14 @@ class _RegisterViewState extends State<RegisterView> {
                           text: 'Register',
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              context.read()<AuthBloc>().add(RegisterEvent(
+                              context.read<AuthBloc>().add(RegisterEvent(
                                     RegisterModelParams(
-                                        email: emailController.text,
-                                        name: nameController.text,
-                                        password: passwordController.text,
-                                        passwordConfirmation:
-                                            confirmPasswordController.text),
+                                      email: emailController.text,
+                                      name: nameController.text,
+                                      password: passwordController.text,
+                                      passwordConfirmation:
+                                          confirmPasswordController.text,
+                                    ),
                                   ));
                             }
                           },
@@ -164,7 +177,7 @@ class _RegisterViewState extends State<RegisterView> {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  Gap(15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -173,14 +186,17 @@ class _RegisterViewState extends State<RegisterView> {
                         style: getSmallTextStyle(context),
                       ),
                       TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Login',
-                            style: getSmallTextStyle(context,
-                                color: AppColors.primaryColor),
-                          ))
+                        onPressed: () {
+                          pushReplacement(context, LoginView());
+                        },
+                        child: Text(
+                          'Login',
+                          style: getSmallTextStyle(context,
+                              color: AppColors.primaryColor),
+                        ),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
