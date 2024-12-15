@@ -10,13 +10,17 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     // Registering the event handler properly
     on<GetBannerHomeEvents>(getBannerHome);
     on<GetBestSellerHomeEvents>(getBestSellerHome);
+    add(GetBannerHomeEvents());
+    add(GetBestSellerHomeEvents());
   }
   late BannerResponseModel bannerResponseModel;
   late BestSellerResponseModel bestSellerResponseModel;
 
   // Defining the method to handle the event
   Future<void> getBannerHome(
-      GetBannerHomeEvents event, Emitter<HomeStates> emit) async {
+    GetBannerHomeEvents event,
+    Emitter<HomeStates> emit,
+  ) async {
     emit(LoadingBannerHomeStates());
     try {
       // Call to HomeRepo's bannerHome method
@@ -35,7 +39,9 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   }
 
   Future<void> getBestSellerHome(
-      GetBestSellerHomeEvents event, Emitter<HomeStates> emit) async {
+    GetBestSellerHomeEvents event,
+    Emitter<HomeStates> emit,
+  ) async {
     emit(LoadingBestSellerHomeStates());
     try {
       // Call to HomeRepo's bannerHome method

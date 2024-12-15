@@ -1,7 +1,5 @@
-import 'package:bookia_app/core/constants/assets_icons.dart';
 import 'package:bookia_app/core/utils/colors.dart';
 import 'package:bookia_app/core/utils/text_style.dart';
-import 'package:bookia_app/core/widgets/custom_button.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_states.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -24,7 +22,9 @@ class _HomeBannerState extends State<HomeBanner> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        BlocBuilder<HomeBloc, HomeStates>(builder: (context, state) {
+        BlocBuilder<HomeBloc, HomeStates>(
+          buildWhen: (previous, current) => current is SuccessBannerHomeStates||current is LoadingBannerHomeStates,
+          builder: (context, state) {
           if (state is SuccessBannerHomeStates) {
             var bannerView = context.read<HomeBloc>().bannerResponseModel;
             return Column(
@@ -33,8 +33,7 @@ class _HomeBannerState extends State<HomeBanner> {
                   itemCount: bannerView.data!.sliders?.length,
                   itemBuilder:
                       (BuildContext context, int itemIndex, int pageViewIndex) {
-                    print(bannerView.data!.sliders![itemIndex]
-                        .image); // Check the image URL
+                // Check the image URL
                     return Stack(children: [
                       Image.network(
                         bannerView.data!.sliders![itemIndex].image ?? '',
