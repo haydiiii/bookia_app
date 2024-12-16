@@ -19,42 +19,37 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => HomeBloc()
-        ..add(GetBannerHomeEvents())
-        ..add(GetBestSellerHomeEvents()),
-      child: Scaffold(
-        appBar: AppBar(
-            centerTitle: false,
-            title: SvgPicture.asset(
-              AssetsIcons.logoSvg,
-              width: 30,
-              height: 30,
-            ),
-            actions: [
-              GestureDetector(
+    return Scaffold(
+      appBar: AppBar(
+          centerTitle: false,
+          title: SvgPicture.asset(
+            AssetsIcons.logoSvg,
+            width: 30,
+            height: 30,
+          ),
+          actions: [
+            GestureDetector(
+                onTap: () {},
+                child: SvgPicture.asset(AssetsIcons.notificationSvg)),
+            Gap(10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
                   onTap: () {},
-                  child: SvgPicture.asset(AssetsIcons.notificationSvg)),
-              Gap(10),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                    onTap: () {},
-                    child: SvgPicture.asset(AssetsIcons.searchSvg)),
-              ),
-            ]),
-        body: Padding(
-          padding: const EdgeInsets.all(15),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                HomeBanner(),
-                Gap(20),
-                Text('BestSeller Books', style: getHeadlineTextStyle(context)),
-                BestSellerProducts(),
-              ],
+                  child: SvgPicture.asset(AssetsIcons.searchSvg)),
             ),
+          ]),
+      body: Padding(
+        padding: const EdgeInsets.all(15),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HomeBanner(),
+              Gap(20),
+              Text('BestSeller Books', style: getHeadlineTextStyle(context)),
+              BestSellerProducts(),
+            ],
           ),
         ),
       ),

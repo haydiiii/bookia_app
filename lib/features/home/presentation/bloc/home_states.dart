@@ -19,3 +19,11 @@ class ErrorBestSellerHomeStates extends HomeStates {
   final String error;
   ErrorBestSellerHomeStates(this.error);
 }
+class LoadingAddToWishlistStates extends HomeStates {}
+
+class SuccessAddToWishlistStates extends HomeStates {}
+
+class ErrorAddToWishlistStates extends HomeStates {
+  final String error; 
+  ErrorAddToWishlistStates(this.error);
+}

@@ -60,36 +60,19 @@ class _BestSellerProductsState extends State<BestSellerProducts> {
                               ),
                             );
                           },
-                          child: Stack(
-                            children: [
-                              Hero(
-                                tag: bestSeller.data!.products![index].id!,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(10),
-                                  child: Image.network(
-                                    bestSeller.data!.products![index].image!,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                    errorBuilder:
-                                        (context, url, error) => Center(
-                                          child: const Icon(Icons.error),
-                                        ),
-                                  ),
-                                ),
+                          child: Hero(
+                            tag: bestSeller.data!.products![index].id!,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                bestSeller.data!.products![index].image!,
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                                errorBuilder:
+                                    (context, url, error) =>
+                                        Center(child: const Icon(Icons.error)),
                               ),
-                              Positioned(
-                                top: 4,
-                                right: 4,
-                                child: IconButton(
-                                  alignment: Alignment.topRight,
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.favorite_outline,
-                                    color: Colors.red,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            ),
                           ),
                         ),
                       ),

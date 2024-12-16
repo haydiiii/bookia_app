@@ -14,8 +14,10 @@ class DioProvider {
   static Future<Response> post(
       {required String endPoint,
       Map<String, dynamic>? data,
-      Map<String, dynamic>? query}) async {
-    return dio.post(endPoint, data: data, queryParameters: query);
+      Map<String, dynamic>? query,
+      Map <String, dynamic>? headers}) async {
+    return dio.post(endPoint, data: data, queryParameters: query,
+    options: Options(headers: headers));
   }
 
   static Future<Response> get(

@@ -1,5 +1,6 @@
 import 'package:bookia_app/core/constants/constatnts.dart';
 import 'package:bookia_app/core/services/dio_provider.dart';
+import 'package:bookia_app/core/services/local_storage.dart';
 import 'package:bookia_app/features/home/data/model/response/banner_response/banner_response_model/banner_response_model.dart';
 import 'package:bookia_app/features/home/data/model/response/best_seller_resonse/best_seller_response_model/best_seller_response_model.dart';
 import 'package:bookia_app/features/home/data/repo/home_end_points.dart';
@@ -27,4 +28,25 @@ class HomeRepo {
       return null;
     }
   }
+ static Future<bool?> addToWishList({required int productId}) async {
+  var url = AppConstants.baseUrl + HomeEndPoints.addToWishList;
+
+  try {
+    var response = await DioProvider.post(
+      endPoint: url,
+      data: {"product_id": productId},
+      headers: {
+        "Authorization": "Bearer ${AppLocalStorage.getCachData(key: AppLocalStorage.token)}"
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    return false;
+  }
+}
 }

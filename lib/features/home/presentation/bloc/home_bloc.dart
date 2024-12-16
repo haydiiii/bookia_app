@@ -10,8 +10,10 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     // Registering the event handler properly
     on<GetBannerHomeEvents>(getBannerHome);
     on<GetBestSellerHomeEvents>(getBestSellerHome);
+    on<AddToWishListEvents>(addToWishList);
     add(GetBannerHomeEvents());
     add(GetBestSellerHomeEvents());
+
   }
   late BannerResponseModel bannerResponseModel;
   late BestSellerResponseModel bestSellerResponseModel;
@@ -58,4 +60,26 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
       emit(ErrorBestSellerHomeStates(e.toString()));
     }
   }
+Future<void> addToWishList(
+  AddToWishListEvents event,
+  Emitter<HomeStates> emit,
+) async {
+  emit(LoadingAddToWishlistStates());
+
+  try {
+    bool? isSuccess = await HomeRepo.addToWishList(productId: event.productId??0);
+
+    if (isSuccess == true) {
+      emit(SuccessAddToWishlistStates());
+    } else {
+      emit(ErrorAddToWishlistStates("Add to wishlist failed"));
+    }
+  } catch (e) {
+    emit(ErrorAddToWishlistStates("An error occurred: ${e.toString()}"));
+  }
 }
+
+}
+
+
+
