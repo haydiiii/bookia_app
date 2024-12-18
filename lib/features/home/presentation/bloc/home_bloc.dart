@@ -1,5 +1,6 @@
 import 'package:bookia_app/features/home/data/model/response/banner_response/banner_response_model/banner_response_model.dart';
 import 'package:bookia_app/features/home/data/model/response/best_seller_resonse/best_seller_response_model/best_seller_response_model.dart';
+import 'package:bookia_app/features/home/data/model/response/get_wishlist_response/get_wishlist/get_wishlist.dart';
 import 'package:bookia_app/features/home/data/repo/home_repo.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_events.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_states.dart';
@@ -11,12 +12,17 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     on<GetBannerHomeEvents>(getBannerHome);
     on<GetBestSellerHomeEvents>(getBestSellerHome);
     on<AddToWishListEvents>(addToWishList);
+    on<RemoveFromWishlistEvent>(removeWishList);
+
+    // on<RemoveFromWishlistEvent>(removeWishList);
+    on<GetWishListEvents>(getWishList);
     add(GetBannerHomeEvents());
     add(GetBestSellerHomeEvents());
-
+    //add(GetWishListEvents());
   }
   late BannerResponseModel bannerResponseModel;
   late BestSellerResponseModel bestSellerResponseModel;
+  late GetWishlist getWishListModel;
 
   // Defining the method to handle the event
   Future<void> getBannerHome(
@@ -60,26 +66,65 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
       emit(ErrorBestSellerHomeStates(e.toString()));
     }
   }
-Future<void> addToWishList(
-  AddToWishListEvents event,
-  Emitter<HomeStates> emit,
-) async {
-  emit(LoadingAddToWishlistStates());
 
-  try {
-    bool? isSuccess = await HomeRepo.addToWishList(productId: event.productId??0);
+  Future<void> getWishList(
+    GetWishListEvents event,
+    Emitter<HomeStates> emit,
+  ) async {
+    emit(LoadingGetWishlistStates());
 
-    if (isSuccess == true) {
-      emit(SuccessAddToWishlistStates());
-    } else {
-      emit(ErrorAddToWishlistStates("Add to wishlist failed"));
+    try {
+      final value = await HomeRepo.getWishList();
+      if (value != null) {
+        getWishListModel = value;
+        emit(SuccessGetWishlistStates());
+      } else {
+        emit(EmptyGetWishlistStates());
+      }
+    } catch (e) {
+      emit(EmptyGetWishlistStates());
     }
-  } catch (e) {
-    emit(ErrorAddToWishlistStates("An error occurred: ${e.toString()}"));
+  }
+
+  Future<void> addToWishList(
+    AddToWishListEvents event,
+    Emitter<HomeStates> emit,
+  ) async {
+    emit(LoadingAddToWishlistStates());
+
+    try {
+      bool? isSuccess = await HomeRepo.addToWishList(
+        productId: event.productId ?? 0,
+      );
+
+      if (isSuccess == true) {
+        emit(SuccessAddToWishlistStates());
+      } else {
+        emit(ErrorAddToWishlistStates("Add to wishlist failed"));
+      }
+    } catch (e) {
+      emit(ErrorAddToWishlistStates("An error occurred: ${e.toString()}"));
+    }
+  }
+
+  Future<void> removeWishList(
+    RemoveFromWishlistEvent event,
+    Emitter<HomeStates> emit,
+  ) async {
+    emit(LoadingAddToWishlistStates());
+
+    try {
+      bool? isSuccess = await HomeRepo.addToWishList(
+        productId: event.productId ?? 0,
+      );
+
+      if (isSuccess == true) {
+        emit(SuccessAddToWishlistStates());
+      } else {
+        emit(ErrorAddToWishlistStates("Add to wishlist failed"));
+      }
+    } catch (e) {
+      emit(ErrorAddToWishlistStates("An error occurred: ${e.toString()}"));
+    }
   }
 }
-
-}
-
-
-

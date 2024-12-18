@@ -8,11 +8,12 @@ class LoginAcceptView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: AcceptView(
-      titleText: "Reset Password",
-      bodyText: "Remember Password?",
-      buttonText: "Login ",
-      nextPage: const LoginView(),
-    ));
+      body: AcceptView(
+        titleText: "Reset Password",
+        bodyText: "Remember Password?",
+        buttonText: "Login ",
+        nextPage: const LoginView(),
+      ),
+    );
   }
 }

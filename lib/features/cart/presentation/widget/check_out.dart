@@ -8,12 +8,10 @@ class CheckOutView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          leading:
-              IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
-          automaticallyImplyLeading: false,
-          title: Text(
-            'CheckOut',
-          )),
+        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+        automaticallyImplyLeading: false,
+        title: Text('CheckOut'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -26,9 +24,7 @@ class CheckOutView extends StatelessWidget {
             Gap(10),
             TextFormField(),
             Gap(10),
-            TextFormField(
-              maxLines: 5,
-            ),
+            TextFormField(maxLines: 5),
           ],
         ),
       ),

@@ -15,12 +15,12 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
     await AuthRepo.login(event.params).then((value) {
       if (value != null) {
         AppLocalStorage.cacheData(
-            key: AppLocalStorage.token, value: value.data?.token);
+          key: AppLocalStorage.token,
+          value: value.data?.token,
+        );
         emit(LoginSuccessStates());
       } else {
-        emit(LoginErrorStates(
-          "Login is Failed",
-        ));
+        emit(LoginErrorStates("Login is Failed"));
       }
     });
   }
@@ -30,12 +30,12 @@ class AuthBloc extends Bloc<AuthEvents, AuthStates> {
     await AuthRepo.register(event.params).then((value) {
       if (value != null) {
         AppLocalStorage.cacheData(
-            key: AppLocalStorage.token, value: value.data?.token);
+          key: AppLocalStorage.token,
+          value: value.data?.token,
+        );
         emit(RegisterSuccessStates());
       } else {
-        emit(RegisterErrorStates(
-          "Register is Failed",
-        ));
+        emit(RegisterErrorStates("Register is Failed"));
       }
     });
   }

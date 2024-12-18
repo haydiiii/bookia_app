@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bookia_app/core/constants/constatnts.dart';
@@ -13,8 +12,10 @@ class AuthRepo {
   static Future<AuthResponseModel?> login(LoginModelParams params) async {
     try {
       var url = AppConstants.baseUrl + AuthEndPoints.login;
-      var rsponse =
-          await DioProvider.post(endPoint: url, data: params.toJson());
+      var rsponse = await DioProvider.post(
+        endPoint: url,
+        data: params.toJson(),
+      );
 
       var model = AuthResponseModel.fromJson(rsponse.data);
       if (rsponse.statusCode == 200) {
@@ -32,8 +33,10 @@ class AuthRepo {
   static Future<AuthResponseModel?> register(RegisterModelParams params) async {
     try {
       var url = AppConstants.baseUrl + AuthEndPoints.register;
-      var response =
-          await DioProvider.post(endPoint: url, data: params.toJson());
+      var response = await DioProvider.post(
+        endPoint: url,
+        data: params.toJson(),
+      );
       var model = AuthResponseModel.fromJson(response.data);
       if (response.statusCode == 201) {
         return model;

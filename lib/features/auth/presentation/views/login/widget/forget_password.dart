@@ -28,10 +28,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
           //   mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Forgot Password?',
-              style: getHeadlineTextStyle(context),
-            ),
+            Text('Forgot Password?', style: getHeadlineTextStyle(context)),
             Gap(15),
             Text(
               "Don't worry! It happens. Please enter the email address linked with your account.",
@@ -40,9 +37,12 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             Gap(40),
             TextFormField(
               decoration: InputDecoration(
-                  hintText: 'Enter your email address',
-                  hintStyle:
-                      getSmallTextStyle(context, color: AppColors.greyColor)),
+                hintText: 'Enter your email address',
+                hintStyle: getSmallTextStyle(
+                  context,
+                  color: AppColors.greyColor,
+                ),
+              ),
             ),
             Gap(40),
             CustomButton(
@@ -58,19 +58,19 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Remember Password?",
-                  style: getSmallTextStyle(context),
-                ),
+                Text("Remember Password?", style: getSmallTextStyle(context)),
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Login ",
-                      style: getSmallTextStyle(context,
-                          color: AppColors.primaryColor),
-                    ))
+                  onPressed: () {},
+                  child: Text(
+                    "Login ",
+                    style: getSmallTextStyle(
+                      context,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

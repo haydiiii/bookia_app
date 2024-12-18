@@ -18,9 +18,7 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('My Cart'),
-      ),
+      appBar: AppBar(title: Text('My Cart')),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
@@ -44,8 +42,9 @@ class _CartViewState extends State<CartView> {
                             fit: BoxFit.cover,
                             width: 100,
                             height: 110,
-                            errorBuilder: (context, url, error) =>
-                                Center(child: const Icon(Icons.error)),
+                            errorBuilder:
+                                (context, url, error) =>
+                                    Center(child: const Icon(Icons.error)),
                           ),
                         ),
                         Gap(15),
@@ -89,32 +88,31 @@ class _CartViewState extends State<CartView> {
                                 ],
                               ),
                               Gap(15),
-                              Row(children: [
-                                FloatingActionButton.small(
-                                  backgroundColor: AppColors.borderColor,
-                                  elevation: 0,
-                                  onPressed: () {},
-                                  child: const Icon(
-                                    Icons.remove,
-                                    color: AppColors.textColor,
+                              Row(
+                                children: [
+                                  FloatingActionButton.small(
+                                    backgroundColor: AppColors.borderColor,
+                                    elevation: 0,
+                                    onPressed: () {},
+                                    child: const Icon(
+                                      Icons.remove,
+                                      color: AppColors.textColor,
+                                    ),
                                   ),
-                                ),
-                                const Gap(10),
-                                Text(
-                                  ' 01',
-                                  style: getBodyTextStyle(context),
-                                ),
-                                const Gap(10),
-                                FloatingActionButton.small(
-                                  backgroundColor: AppColors.borderColor,
-                                  elevation: 0,
-                                  onPressed: () {},
-                                  child: const Icon(
-                                    Icons.add,
-                                    color: AppColors.textColor,
+                                  const Gap(10),
+                                  Text(' 01', style: getBodyTextStyle(context)),
+                                  const Gap(10),
+                                  FloatingActionButton.small(
+                                    backgroundColor: AppColors.borderColor,
+                                    elevation: 0,
+                                    onPressed: () {},
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: AppColors.textColor,
+                                    ),
                                   ),
-                                ),
-                              ])
+                                ],
+                              ),
                             ],
                           ),
                         ),
@@ -122,21 +120,17 @@ class _CartViewState extends State<CartView> {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const Divider(
-                  endIndent: 20,
-                  indent: 20,
-                ),
+                separatorBuilder:
+                    (context, index) =>
+                        const Divider(endIndent: 20, indent: 20),
                 itemCount: 2,
               ),
             ),
             Row(
               children: [
-                Text(
-                  'Total',
-                  style: getBodyTextStyle(context),
-                ),
+                Text('Total', style: getBodyTextStyle(context)),
                 Spacer(),
-                Text('price ')
+                Text('price '),
               ],
             ),
             Gap(10),
@@ -147,7 +141,7 @@ class _CartViewState extends State<CartView> {
               },
               color: AppColors.primaryColor,
               textColor: AppColors.whiteColor,
-            )
+            ),
           ],
         ),
       ),

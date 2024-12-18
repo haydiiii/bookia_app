@@ -18,26 +18,16 @@ class WelcomeView extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          Image.asset(
-            AssetsIcons.welcomeBg,
-            fit: BoxFit.fill,
-          ),
+          Image.asset(AssetsIcons.welcomeBg, fit: BoxFit.fill),
           Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Spacer(
-                  flex: 1,
-                ),
+                Spacer(flex: 1),
                 SvgPicture.asset(AssetsIcons.logoSvg),
-                Text(
-                  'Order Your Book Now!',
-                  style: getTitleTextStyle(context),
-                ),
-                Spacer(
-                  flex: 2,
-                ),
+                Text('Order Your Book Now!', style: getTitleTextStyle(context)),
+                Spacer(flex: 2),
                 CustomButton(
                   textColor: AppColors.whiteColor,
                   color: AppColors.primaryColor,
@@ -57,12 +47,10 @@ class WelcomeView extends StatelessWidget {
                   },
                   width: double.infinity,
                 ),
-                Spacer(
-                  flex: 1,
-                ),
+                Spacer(flex: 1),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

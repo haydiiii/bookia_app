@@ -1,11 +1,8 @@
 import 'package:bookia_app/core/constants/assets_icons.dart';
 import 'package:bookia_app/core/utils/text_style.dart';
-import 'package:bookia_app/features/home/presentation/bloc/home_bloc.dart';
-import 'package:bookia_app/features/home/presentation/bloc/home_events.dart';
 import 'package:bookia_app/features/home/presentation/widgets/home_banner.dart';
 import 'package:bookia_app/features/home/presentation/widgets/best_seller_products.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 
@@ -21,24 +18,23 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          centerTitle: false,
-          title: SvgPicture.asset(
-            AssetsIcons.logoSvg,
-            width: 30,
-            height: 30,
+        centerTitle: false,
+        title: SvgPicture.asset(AssetsIcons.logoSvg, width: 30, height: 30),
+        actions: [
+          GestureDetector(
+            onTap: () {},
+            child: SvgPicture.asset(AssetsIcons.notificationSvg),
           ),
-          actions: [
-            GestureDetector(
-                onTap: () {},
-                child: SvgPicture.asset(AssetsIcons.notificationSvg)),
-            Gap(10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                  onTap: () {},
-                  child: SvgPicture.asset(AssetsIcons.searchSvg)),
+          Gap(10),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {},
+              child: SvgPicture.asset(AssetsIcons.searchSvg),
             ),
-          ]),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: SingleChildScrollView(

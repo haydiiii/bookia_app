@@ -28,10 +28,7 @@ class _CreateNewPasswViewState extends State<CreateNewPasswView> {
           //   mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Create new password",
-              style: getHeadlineTextStyle(context),
-            ),
+            Text("Create new password", style: getHeadlineTextStyle(context)),
             Gap(15),
             Text(
               "Your new password must be unique from those previously used.",
@@ -40,16 +37,22 @@ class _CreateNewPasswViewState extends State<CreateNewPasswView> {
             Gap(40),
             TextFormField(
               decoration: InputDecoration(
-                  hintText: "New Password",
-                  hintStyle:
-                      getSmallTextStyle(context, color: AppColors.greyColor)),
+                hintText: "New Password",
+                hintStyle: getSmallTextStyle(
+                  context,
+                  color: AppColors.greyColor,
+                ),
+              ),
             ),
             Gap(15),
             TextFormField(
               decoration: InputDecoration(
-                  hintText: " Confirm Password",
-                  hintStyle:
-                      getSmallTextStyle(context, color: AppColors.greyColor)),
+                hintText: " Confirm Password",
+                hintStyle: getSmallTextStyle(
+                  context,
+                  color: AppColors.greyColor,
+                ),
+              ),
             ),
             Gap(40),
             CustomButton(
@@ -65,19 +68,19 @@ class _CreateNewPasswViewState extends State<CreateNewPasswView> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  "Remember Password?",
-                  style: getSmallTextStyle(context),
-                ),
+                Text("Remember Password?", style: getSmallTextStyle(context)),
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Login ",
-                      style: getSmallTextStyle(context,
-                          color: AppColors.primaryColor),
-                    ))
+                  onPressed: () {},
+                  child: Text(
+                    "Login ",
+                    style: getSmallTextStyle(
+                      context,
+                      color: AppColors.primaryColor,
+                    ),
+                  ),
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -37,12 +37,7 @@ class _SplashViewState extends State<SplashView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(AssetsIcons.logoSvg),
-            Text(
-              'Order Your Book Now!',
-              style: getTitleTextStyle(
-                context,
-              ),
-            )
+            Text('Order Your Book Now!', style: getTitleTextStyle(context)),
           ],
         ),
       ),

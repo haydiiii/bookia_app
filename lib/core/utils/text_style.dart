@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
-TextStyle getHeadlineTextStyle(context,
-    {double fontSize = 30, fontWeight = FontWeight.normal, Color? color}) {
+TextStyle getHeadlineTextStyle(
+  context, {
+  double fontSize = 30,
+  fontWeight = FontWeight.normal,
+  Color? color,
+}) {
   return TextStyle(
     fontSize: fontSize,
     fontWeight: fontWeight,
@@ -11,8 +15,12 @@ TextStyle getHeadlineTextStyle(context,
 
 // title
 
-TextStyle getTitleTextStyle(context,
-    {double fontSize = 24, fontWeight = FontWeight.normal, Color? color}) {
+TextStyle getTitleTextStyle(
+  context, {
+  double fontSize = 24,
+  fontWeight = FontWeight.normal,
+  Color? color,
+}) {
   return TextStyle(
     fontSize: fontSize,
     fontWeight: fontWeight,
@@ -20,8 +28,12 @@ TextStyle getTitleTextStyle(context,
   );
 }
 
-TextStyle getBodyTextStyle(context,
-    {double fontSize = 18, fontWeight = FontWeight.normal, Color? color}) {
+TextStyle getBodyTextStyle(
+  context, {
+  double fontSize = 18,
+  fontWeight = FontWeight.normal,
+  Color? color,
+}) {
   return TextStyle(
     fontSize: fontSize,
     fontWeight: fontWeight,
@@ -30,8 +42,12 @@ TextStyle getBodyTextStyle(context,
 }
 // small
 
-TextStyle getSmallTextStyle(context,
-    {double fontSize = 16, fontWeight = FontWeight.normal, Color? color}) {
+TextStyle getSmallTextStyle(
+  context, {
+  double fontSize = 16,
+  fontWeight = FontWeight.normal,
+  Color? color,
+}) {
   return TextStyle(
     fontSize: fontSize,
     fontWeight: fontWeight,

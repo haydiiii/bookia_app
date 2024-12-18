@@ -74,8 +74,10 @@ class _RegisterViewState extends State<RegisterView> {
                     },
                     decoration: InputDecoration(
                       hintText: 'UserName',
-                      hintStyle: getSmallTextStyle(context,
-                          color: AppColors.greyColor),
+                      hintStyle: getSmallTextStyle(
+                        context,
+                        color: AppColors.greyColor,
+                      ),
                     ),
                   ),
                   Gap(15),
@@ -90,8 +92,10 @@ class _RegisterViewState extends State<RegisterView> {
                     },
                     decoration: InputDecoration(
                       hintText: 'Email',
-                      hintStyle: getSmallTextStyle(context,
-                          color: AppColors.greyColor),
+                      hintStyle: getSmallTextStyle(
+                        context,
+                        color: AppColors.greyColor,
+                      ),
                     ),
                   ),
                   Gap(15),
@@ -105,12 +109,12 @@ class _RegisterViewState extends State<RegisterView> {
                       }
                     },
                     decoration: InputDecoration(
-                      suffixIcon: SvgPicture.asset(
-                        AssetsIcons.eyeSvg,
-                      ),
+                      suffixIcon: SvgPicture.asset(AssetsIcons.eyeSvg),
                       hintText: 'Password',
-                      hintStyle: getSmallTextStyle(context,
-                          color: AppColors.greyColor),
+                      hintStyle: getSmallTextStyle(
+                        context,
+                        color: AppColors.greyColor,
+                      ),
                     ),
                   ),
                   Gap(15),
@@ -125,56 +129,50 @@ class _RegisterViewState extends State<RegisterView> {
                       return null;
                     },
                     decoration: InputDecoration(
-                      suffixIcon: SvgPicture.asset(
-                        AssetsIcons.eyeSvg,
-                      ),
+                      suffixIcon: SvgPicture.asset(AssetsIcons.eyeSvg),
                       hintText: 'Confirm Password',
-                      hintStyle: getSmallTextStyle(context,
-                          color: AppColors.greyColor),
+                      hintStyle: getSmallTextStyle(
+                        context,
+                        color: AppColors.greyColor,
+                      ),
                     ),
                   ),
                   Gap(15),
                   (state is RegisterLoadingStates)
                       ? Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.primaryColor,
-                          ),
-                        )
-                      : CustomButton(
+                        child: CircularProgressIndicator(
                           color: AppColors.primaryColor,
-                          textColor: AppColors.whiteColor,
-                          text: 'Register',
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              context.read<AuthBloc>().add(RegisterEvent(
-                                    RegisterModelParams(
-                                      email: emailController.text,
-                                      name: nameController.text,
-                                      password: passwordController.text,
-                                      passwordConfirmation:
-                                          confirmPasswordController.text,
-                                    ),
-                                  ));
-                            }
-                          },
                         ),
+                      )
+                      : CustomButton(
+                        color: AppColors.primaryColor,
+                        textColor: AppColors.whiteColor,
+                        text: 'Register',
+                        onPressed: () {
+                          if (formKey.currentState!.validate()) {
+                            context.read<AuthBloc>().add(
+                              RegisterEvent(
+                                RegisterModelParams(
+                                  email: emailController.text,
+                                  name: nameController.text,
+                                  password: passwordController.text,
+                                  passwordConfirmation:
+                                      confirmPasswordController.text,
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
                   Gap(15),
-                  OrDivider(
-                    text: 'Or Register with',
-                  ),
+                  OrDivider(text: 'Or Register with'),
                   Gap(15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ButtonOfSocial(
-                        imagePath: AssetsIcons.facebookSvg,
-                      ),
-                      ButtonOfSocial(
-                        imagePath: AssetsIcons.googleSvg,
-                      ),
-                      ButtonOfSocial(
-                        imagePath: AssetsIcons.appleSvg,
-                      ),
+                      ButtonOfSocial(imagePath: AssetsIcons.facebookSvg),
+                      ButtonOfSocial(imagePath: AssetsIcons.googleSvg),
+                      ButtonOfSocial(imagePath: AssetsIcons.appleSvg),
                     ],
                   ),
                   Gap(15),
@@ -191,8 +189,10 @@ class _RegisterViewState extends State<RegisterView> {
                         },
                         child: Text(
                           'Login',
-                          style: getSmallTextStyle(context,
-                              color: AppColors.primaryColor),
+                          style: getSmallTextStyle(
+                            context,
+                            color: AppColors.primaryColor,
+                          ),
                         ),
                       ),
                     ],

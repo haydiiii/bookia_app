@@ -1,7 +1,12 @@
-import 'package:bookia_app/core/constants/assets_icons.dart';
+import 'package:bookia_app/core/functions/dialogs.dart';
 import 'package:bookia_app/core/utils/colors.dart';
+import 'package:bookia_app/core/utils/text_style.dart';
 import 'package:bookia_app/core/widgets/custom_button.dart';
+import 'package:bookia_app/features/home/presentation/bloc/home_bloc.dart';
+import 'package:bookia_app/features/home/presentation/bloc/home_events.dart';
+import 'package:bookia_app/features/home/presentation/bloc/home_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
 class WishlistView extends StatefulWidget {
@@ -13,97 +18,120 @@ class WishlistView extends StatefulWidget {
 
 class _WishlistViewState extends State<WishlistView> {
   @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(GetWishListEvents());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favorite Books'),
+        title: Text('Wishlist', style: getTitleTextStyle(context)),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.only(left: 10, right: 10),
-                  decoration: BoxDecoration(
-                    color: AppColors.accentColor,
-                    borderRadius: BorderRadius.circular(10),
+      body: BlocConsumer<HomeBloc, HomeStates>(
+        listener: (context, state) {
+          if (state is LoadingGetWishlistStates ||
+              state is DeleteFromWishlistLoadingState) {
+            showLoadingDialog(context);
+          } else if (state is DeleteFromWishlistSuccessState) {
+            Navigator.pop(context);
+            context.read<HomeBloc>().add(GetWishListEvents());
+          } else if (state is SuccessGetWishlistStates ||
+              state is EmptyGetWishlistStates) {
+            Navigator.pop(context);
+          }
+        },
+        builder: (context, state) {
+          if (state is EmptyGetWishlistStates) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.not_interested_rounded,
+                    size: 100,
+                    color: AppColors.primaryColor,
                   ),
-                  child: Row(
+                  const Gap(20),
+                  Text('Wishlist is empty', style: getBodyTextStyle(context)),
+                ],
+              ),
+            );
+          } else if (state is SuccessGetWishlistStates) {
+            var wishList = context.read<HomeBloc>().getWishListModel.data?.data;
+
+            return Padding(
+              padding: const EdgeInsets.all(22),
+              child: ListView.separated(
+                shrinkWrap: true,
+                itemCount:
+                    wishList!
+                        .length, // Set itemCount to 0 for empty state or update with data
+                separatorBuilder: (BuildContext context, int index) {
+                  return const Divider();
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return Row(
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(10),
-                        child: Image.asset(
-                          AssetsIcons.watch,
-                          fit: BoxFit.cover,
+                        child: Image.network(
+                          wishList[index].image ?? '',
                           width: 100,
-                          height: 110,
-                          errorBuilder: (context, url, error) =>
-                              Center(child: const Icon(Icons.error)),
+                          fit: BoxFit.cover,
+                          errorBuilder:
+                              (context, url, error) =>
+                                  Center(child: const Icon(Icons.error)),
                         ),
                       ),
-                      Gap(15),
+                      const Gap(20),
                       Expanded(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('The Republic'),
-                                    Text('Price'),
-                                  ],
-                                ),
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Builder(
-                                    builder: (context) {
-                                      return CircleAvatar(
-                                        backgroundColor: AppColors.textColor,
-                                        radius: 10,
-                                        child: CircleAvatar(
-                                          backgroundColor:
-                                              AppColors.accentColor,
-                                          radius: 8,
-                                          child: Icon(
-                                            Icons.close,
-                                            size: 12,
-                                            color: AppColors.textColor,
-                                          ),
-                                        ),
-                                      );
-                                    },
+                                Expanded(
+                                  child: Text(
+                                    wishList[index].name ?? '',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: getBodyTextStyle(context),
                                   ),
+                                ),
+                                IconButton.outlined(
+                                  constraints: const BoxConstraints(
+                                    maxWidth: 24,
+                                    maxHeight: 24,
+                                  ),
+                                  onPressed: () {},
+                                  iconSize: 16,
+                                  padding: const EdgeInsets.all(2),
+                                  icon: const Icon(Icons.close),
                                 ),
                               ],
                             ),
-                            Gap(15),
-                            CustomButton(
-                              textColor: AppColors.whiteColor,
-                              text: 'Add to Cart',
-                              onPressed: () {},
-                              color: AppColors.primaryColor,
+                            const Gap(5),
+                            Text(
+                              '\$${wishList[index].price}',
+                              style: getBodyTextStyle(context),
                             ),
+                            const Gap(20),
+                            CustomButton(text: 'Add to cart', onPressed: () {}),
+                            const Gap(10),
                           ],
                         ),
                       ),
                     ],
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => const Divider(
-                endIndent: 20,
-                indent: 20,
+                  );
+                },
               ),
-              itemCount: 2,
-            ),
-          ),
-        ],
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }

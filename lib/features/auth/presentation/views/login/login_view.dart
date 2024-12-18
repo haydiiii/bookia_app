@@ -45,8 +45,10 @@ class _LoginViewState extends State<LoginView> {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             centerTitle: false,
-            title:
-                IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+            title: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.arrow_back_ios),
+            ),
           ),
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(15),
@@ -70,9 +72,12 @@ class _LoginViewState extends State<LoginView> {
                       }
                     },
                     decoration: InputDecoration(
-                        hintText: 'Enter your email address',
-                        hintStyle: getSmallTextStyle(context,
-                            color: AppColors.greyColor)),
+                      hintText: 'Enter your email address',
+                      hintStyle: getSmallTextStyle(
+                        context,
+                        color: AppColors.greyColor,
+                      ),
+                    ),
                   ),
                   Gap(15),
                   TextFormField(
@@ -85,12 +90,13 @@ class _LoginViewState extends State<LoginView> {
                       }
                     },
                     decoration: InputDecoration(
-                        suffixIcon: SvgPicture.asset(
-                          AssetsIcons.eyeSvg,
-                        ),
-                        hintText: 'Enter your Password',
-                        hintStyle: getSmallTextStyle(context,
-                            color: AppColors.greyColor)),
+                      suffixIcon: SvgPicture.asset(AssetsIcons.eyeSvg),
+                      hintText: 'Enter your Password',
+                      hintStyle: getSmallTextStyle(
+                        context,
+                        color: AppColors.greyColor,
+                      ),
+                    ),
                   ),
                   Gap(15),
                   Row(
@@ -114,30 +120,26 @@ class _LoginViewState extends State<LoginView> {
                     text: 'Login',
                     onPressed: () {
                       if (formKey.currentState!.validate()) {
-                        context.read<AuthBloc>().add(LoginEvent(
+                        context.read<AuthBloc>().add(
+                          LoginEvent(
                             LoginModelParams(
-                                email: emailController.text,
-                                password: passwordController.text)));
+                              email: emailController.text,
+                              password: passwordController.text,
+                            ),
+                          ),
+                        );
                       }
                     },
                   ),
                   Gap(15),
-                  OrDivider(
-                    text: 'Or Login with',
-                  ),
+                  OrDivider(text: 'Or Login with'),
                   Gap(15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ButtonOfSocial(
-                        imagePath: AssetsIcons.facebookSvg,
-                      ),
-                      ButtonOfSocial(
-                        imagePath: AssetsIcons.googleSvg,
-                      ),
-                      ButtonOfSocial(
-                        imagePath: AssetsIcons.appleSvg,
-                      ),
+                      ButtonOfSocial(imagePath: AssetsIcons.facebookSvg),
+                      ButtonOfSocial(imagePath: AssetsIcons.googleSvg),
+                      ButtonOfSocial(imagePath: AssetsIcons.appleSvg),
                     ],
                   ),
                   Gap(30),
@@ -149,14 +151,17 @@ class _LoginViewState extends State<LoginView> {
                         style: getSmallTextStyle(context),
                       ),
                       TextButton(
-                          onPressed: () {
-                            pushReplacement(context, RegisterView());
-                          },
-                          child: Text(
-                            'Register Now',
-                            style: getSmallTextStyle(context,
-                                color: AppColors.primaryColor),
-                          )),
+                        onPressed: () {
+                          pushReplacement(context, RegisterView());
+                        },
+                        child: Text(
+                          'Register Now',
+                          style: getSmallTextStyle(
+                            context,
+                            color: AppColors.primaryColor,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],

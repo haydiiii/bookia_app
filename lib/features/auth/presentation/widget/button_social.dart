@@ -4,10 +4,7 @@ import 'package:flutter_svg/svg.dart';
 
 class ButtonOfSocial extends StatelessWidget {
   final String imagePath;
-  const ButtonOfSocial({
-    super.key,
-    required this.imagePath,
-  });
+  const ButtonOfSocial({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {

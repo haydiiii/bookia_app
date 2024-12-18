@@ -30,10 +30,7 @@ class AcceptView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(AssetsIcons.doneSvg),
-              Text(
-                titleText,
-                style: getHeadlineTextStyle(context),
-              ),
+              Text(titleText, style: getHeadlineTextStyle(context)),
               Gap(15),
               Text(
                 bodyText,

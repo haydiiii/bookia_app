@@ -21,49 +21,62 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: pages[index],
-        bottomNavigationBar: BottomNavigationBar(
-            showUnselectedLabels: false,
-            showSelectedLabels: false,
-            // selectedItemColor: AppColors.primary,
-            // unselectedItemColor: AppColors.grey,
-            // backgroundColor: AppColors.background,
-            currentIndex: index,
-            onTap: (value) => setState(() => index = value),
-            items: [
-              BottomNavigationBarItem(
-                icon: SvgPicture.asset(AssetsIcons.homeSvg),
-                activeIcon: SvgPicture.asset(
-                  AssetsIcons.homeSvg,
-                  colorFilter:
-                      ColorFilter.mode(AppColors.primaryColor, BlendMode.srcIn),
-                ),
-                label: 'Home',
+      body: pages[index],
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: false,
+        showSelectedLabels: false,
+        // selectedItemColor: AppColors.primary,
+        // unselectedItemColor: AppColors.grey,
+        // backgroundColor: AppColors.background,
+        currentIndex: index,
+        onTap: (value) => setState(() => index = value),
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(AssetsIcons.homeSvg),
+            activeIcon: SvgPicture.asset(
+              AssetsIcons.homeSvg,
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
               ),
-              BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AssetsIcons.wishlistSvg),
-                  activeIcon: SvgPicture.asset(
-                    AssetsIcons.wishlistSvg,
-                    colorFilter: ColorFilter.mode(
-                        AppColors.primaryColor, BlendMode.srcIn),
-                  ),
-                  label: 'Wishlist'),
-              BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AssetsIcons.cartSvg),
-                  activeIcon: SvgPicture.asset(
-                    AssetsIcons.cartSvg,
-                    colorFilter: ColorFilter.mode(
-                        AppColors.primaryColor, BlendMode.srcIn),
-                  ),
-                  label: 'Cart'),
-              BottomNavigationBarItem(
-                  icon: SvgPicture.asset(AssetsIcons.profileSvg),
-                  activeIcon: SvgPicture.asset(
-                    AssetsIcons.profileSvg,
-                    colorFilter: ColorFilter.mode(
-                        AppColors.primaryColor, BlendMode.srcIn),
-                  ),
-                  label: 'Profile'),
-            ]));
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(AssetsIcons.wishlistSvg),
+            activeIcon: SvgPicture.asset(
+              AssetsIcons.wishlistSvg,
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Wishlist',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(AssetsIcons.cartSvg),
+            activeIcon: SvgPicture.asset(
+              AssetsIcons.cartSvg,
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Cart',
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(AssetsIcons.profileSvg),
+            activeIcon: SvgPicture.asset(
+              AssetsIcons.profileSvg,
+              colorFilter: ColorFilter.mode(
+                AppColors.primaryColor,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Profile',
+          ),
+        ],
+      ),
+    );
   }
 }

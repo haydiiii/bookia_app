@@ -1,3 +1,4 @@
+
 import 'package:bookia_app/core/services/dio_provider.dart';
 import 'package:bookia_app/core/services/local_storage.dart';
 import 'package:bookia_app/core/utils/themes.dart';
@@ -25,9 +26,10 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => HomeBloc()),
       ],
       child: MaterialApp(
-          theme: AppTheme.lightTheme,
-          debugShowCheckedModeBanner: false,
-          home: SplashView()),
+        theme: AppTheme.lightTheme,
+        debugShowCheckedModeBanner: false,
+        home: SplashView(),
+      ),
     );
   }
 }

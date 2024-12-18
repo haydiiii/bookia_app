@@ -29,20 +29,18 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          shape: shape ??
+          shape:
+              shape ??
               RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.circular(5), // شكل افتراضي بزوايا دائرية
+                borderRadius: BorderRadius.circular(
+                  5,
+                ), // شكل افتراضي بزوايا دائرية
               ),
           backgroundColor: color,
         ),
         child: Text(
           text,
-          style: getTitleTextStyle(
-            color: textColor,
-            fontSize: 14,
-            context,
-          ),
+          style: getTitleTextStyle(color: textColor, fontSize: 14, context),
         ),
       ),
     );

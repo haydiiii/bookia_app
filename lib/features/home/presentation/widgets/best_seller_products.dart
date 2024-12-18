@@ -3,6 +3,7 @@ import 'package:bookia_app/core/utils/colors.dart';
 import 'package:bookia_app/core/utils/text_style.dart';
 import 'package:bookia_app/core/widgets/custom_button.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_bloc.dart';
+import 'package:bookia_app/features/home/presentation/bloc/home_events.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_states.dart';
 import 'package:bookia_app/features/home/presentation/widgets/book_details_view.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,12 @@ class BestSellerProducts extends StatefulWidget {
 
 @override
 class _BestSellerProductsState extends State<BestSellerProducts> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeBloc>().add(GetBestSellerHomeEvents());
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeStates>(

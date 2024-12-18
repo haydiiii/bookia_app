@@ -14,9 +14,8 @@ class AddToWishListEvents extends HomeEvents {
 
   AddToWishListEvents({ required this.productId});
 }
-class RemoveToWishListEvents extends HomeEvents {
-  String? productId;
+class RemoveFromWishlistEvent extends HomeEvents {
+  int? productId;
 
- RemoveToWishListEvents({ required this.productId});
+ RemoveFromWishlistEvent({ required this.productId});
 }
-
