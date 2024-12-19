@@ -3,7 +3,7 @@ import 'package:bookia_app/core/functions/navigation.dart';
 import 'package:bookia_app/core/utils/colors.dart';
 import 'package:bookia_app/core/utils/text_style.dart';
 import 'package:bookia_app/core/widgets/custom_button.dart';
-import 'package:bookia_app/features/cart/presentation/widget/check_out.dart';
+import 'package:bookia_app/features/home/presentation/view/presentation/cart/views/widget/check_out.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

@@ -47,7 +47,18 @@ class BookDetails extends StatelessWidget {
             showSuccessDialog(context, 'Product added to wishlist');
           } else if (state is ErrorAddToWishlistStates) {
             showErrorDialog(context, state.error);
-          } else {
+          }
+          else if ( state is AddToCartSuccessState){
+            showSuccessDialog(context, 'Product added to cart');
+          }else if (state is AddToCartErrorState){
+            showErrorDialog(context, state.error);
+          }
+          else if (state is AddToCartLoadingState){
+            showLoadingDialog(context);
+                        pop(context);
+
+          }
+           else {
             showLoadingDialog(context);
             pop(context);
           }
@@ -122,7 +133,11 @@ class BookDetails extends StatelessWidget {
                     color: AppColors.primaryColor,
                     textColor: AppColors.whiteColor,
                     text: 'Add to Cart',
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<HomeBloc>().add(
+                        AddToCartEvents(productId: product.id),
+                      );
+                    },
                   ),
                 ],
               ),

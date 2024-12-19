@@ -105,7 +105,13 @@ class _WishlistViewState extends State<WishlistView> {
                                     maxWidth: 24,
                                     maxHeight: 24,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.read<HomeBloc>().add(
+                                      RemoveFromWishlistEvent(
+                                        productId: wishList[index].id,
+                                      ),
+                                    );
+                                  },
                                   iconSize: 16,
                                   padding: const EdgeInsets.all(2),
                                   icon: const Icon(Icons.close),

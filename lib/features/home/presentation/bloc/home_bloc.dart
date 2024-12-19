@@ -13,6 +13,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     on<GetBestSellerHomeEvents>(getBestSellerHome);
     on<AddToWishListEvents>(addToWishList);
     on<RemoveFromWishlistEvent>(removeWishList);
+    on<AddToCartEvents>(addToCart);
 
     // on<RemoveFromWishlistEvent>(removeWishList);
     on<GetWishListEvents>(getWishList);
@@ -111,20 +112,47 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     RemoveFromWishlistEvent event,
     Emitter<HomeStates> emit,
   ) async {
-    emit(LoadingAddToWishlistStates());
+    emit(DeleteFromWishlistLoadingState());
 
     try {
-      bool? isSuccess = await HomeRepo.addToWishList(
+      bool? isSuccess = await HomeRepo.removefromWishList(
         productId: event.productId ?? 0,
       );
 
       if (isSuccess == true) {
-        emit(SuccessAddToWishlistStates());
+        emit(DeleteFromWishlistSuccessState());
       } else {
-        emit(ErrorAddToWishlistStates("Add to wishlist failed"));
+        emit(DeleteFromWishlistFieldState("Add to wishlist failed"));
       }
     } catch (e) {
-      emit(ErrorAddToWishlistStates("An error occurred: ${e.toString()}"));
+      emit(DeleteFromWishlistFieldState("An error occurred: ${e.toString()}"));
     }
   }
+
+Future<void> addToCart(
+  AddToCartEvents event,
+  Emitter<HomeStates> emit,
+) async {
+  emit(AddToCartLoadingState());
+
+  try {
+    if (event.productId == null || event.productId == 0) {
+      emit(AddToCartErrorState("Invalid product ID"));
+      return;
+    }
+
+    bool? isSuccess = await HomeRepo.addToCart(
+      productId: event.productId!, 
+    );
+
+    if (isSuccess == true) {
+      emit(AddToCartSuccessState());
+    } else {
+      emit(AddToCartErrorState("Add to cart failed"));
+    }
+  } catch (e) {
+    emit(AddToCartErrorState("An error occurred: ${e.toString()}"));
+  }
+}
+
 }

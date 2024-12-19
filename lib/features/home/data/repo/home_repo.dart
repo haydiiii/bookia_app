@@ -91,4 +91,26 @@ class HomeRepo {
       return false;
     }
   }
-}
+  ///////////addToCart//////////////////
+  static Future<bool?> addToCart({required int productId}) async {
+    var url = AppConstants.baseUrl + HomeEndPoints.addToCart;
+
+    try {
+      var response = await DioProvider.post(
+        endPoint: url,
+        data: {"product_id": productId},
+        headers: {
+          "Authorization":
+              "Bearer ${AppLocalStorage.getCachData(key: AppLocalStorage.token)}",
+        },
+      );
+
+      if (response.statusCode == 201) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }}
