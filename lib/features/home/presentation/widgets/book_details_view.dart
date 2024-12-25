@@ -47,18 +47,14 @@ class BookDetails extends StatelessWidget {
             showSuccessDialog(context, 'Product added to wishlist');
           } else if (state is ErrorAddToWishlistStates) {
             showErrorDialog(context, state.error);
-          }
-          else if ( state is AddToCartSuccessState){
+          } else if (state is AddToCartSuccessState) {
             showSuccessDialog(context, 'Product added to cart');
-          }else if (state is AddToCartErrorState){
+          } else if (state is AddToCartErrorState) {
             showErrorDialog(context, state.error);
-          }
-          else if (state is AddToCartLoadingState){
+          } else if (state is AddToCartLoadingState) {
             showLoadingDialog(context);
-                        pop(context);
-
-          }
-           else {
+            pop(context);
+          } else {
             showLoadingDialog(context);
             pop(context);
           }

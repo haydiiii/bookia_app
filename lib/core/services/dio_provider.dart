@@ -7,8 +7,8 @@ class DioProvider {
     dio = Dio(
       BaseOptions(
         baseUrl: AppConstants.baseUrl,
-        connectTimeout: Duration(seconds: 30),
-        receiveTimeout: Duration(seconds: 30),
+        // connectTimeout: Duration(seconds: 30),
+        // receiveTimeout: Duration(seconds: 30),
       ),
     );
   }

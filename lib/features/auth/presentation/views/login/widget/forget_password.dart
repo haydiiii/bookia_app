@@ -2,7 +2,7 @@ import 'package:bookia_app/core/functions/navigation.dart';
 import 'package:bookia_app/core/utils/colors.dart';
 import 'package:bookia_app/core/utils/text_style.dart';
 import 'package:bookia_app/core/widgets/custom_button.dart';
-import 'package:bookia_app/features/auth/presentation/views/login/widget/create_new_passw_view.dart';
+import 'package:bookia_app/features/auth/presentation/views/login/widget/otp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -20,7 +20,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: false,
-        title: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back_ios)),
+        title: IconButton(onPressed: () {
+          pushReplacement(context, ForgetPasswordView());
+        }, icon: Icon(Icons.arrow_back_ios)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
@@ -50,7 +52,7 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
               textColor: AppColors.whiteColor,
               text: "Send Code",
               onPressed: () {
-                push(context, CreateNewPasswView());
+              pushReplacement(context, OtpView());
               },
             ),
             Gap(15),
@@ -60,7 +62,9 @@ class _ForgetPasswordViewState extends State<ForgetPasswordView> {
               children: [
                 Text("Remember Password?", style: getSmallTextStyle(context)),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    
+                  },
                   child: Text(
                     "Login ",
                     style: getSmallTextStyle(

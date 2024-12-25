@@ -1,5 +1,6 @@
 import 'package:bookia_app/features/home/data/model/response/banner_response/banner_response_model/banner_response_model.dart';
 import 'package:bookia_app/features/home/data/model/response/best_seller_resonse/best_seller_response_model/best_seller_response_model.dart';
+import 'package:bookia_app/features/home/data/model/response/get_cart_response_model/get_cart_model/get_cart_model.dart';
 import 'package:bookia_app/features/home/data/model/response/get_wishlist_response/get_wishlist/get_wishlist.dart';
 import 'package:bookia_app/features/home/data/repo/home_repo.dart';
 import 'package:bookia_app/features/home/presentation/bloc/home_events.dart';
@@ -14,6 +15,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     on<AddToWishListEvents>(addToWishList);
     on<RemoveFromWishlistEvent>(removeWishList);
     on<AddToCartEvents>(addToCart);
+    on<GetCartEvents>(getCart);
 
     // on<RemoveFromWishlistEvent>(removeWishList);
     on<GetWishListEvents>(getWishList);
@@ -23,6 +25,7 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
   }
   late BannerResponseModel bannerResponseModel;
   late BestSellerResponseModel bestSellerResponseModel;
+  late GetCartModel getCartModel;
   late GetWishlist getWishListModel;
 
   // Defining the method to handle the event
@@ -86,6 +89,25 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
       emit(EmptyGetWishlistStates());
     }
   }
+  Future<void> getCart(
+    GetCartEvents event,
+    Emitter<HomeStates> emit,
+  ) async {
+    emit(LoadingGetCartStates());
+
+    try {
+      final value = await HomeRepo.getCart();
+      if (value != null) {
+        getCartModel = value;
+
+        emit(SuccessGetCartStates());
+      } else {
+        emit(EmptyGetCartStates());
+      }
+    } catch (e) {
+      emit(EmptyGetCartStates());
+    }
+  }
 
   Future<void> addToWishList(
     AddToWishListEvents event,
@@ -129,30 +151,27 @@ class HomeBloc extends Bloc<HomeEvents, HomeStates> {
     }
   }
 
-Future<void> addToCart(
-  AddToCartEvents event,
-  Emitter<HomeStates> emit,
-) async {
-  emit(AddToCartLoadingState());
+  Future<void> addToCart(
+    AddToCartEvents event,
+    Emitter<HomeStates> emit,
+  ) async {
+    emit(AddToCartLoadingState());
 
-  try {
-    if (event.productId == null || event.productId == 0) {
-      emit(AddToCartErrorState("Invalid product ID"));
-      return;
+    try {
+      if (event.productId == null || event.productId == 0) {
+        emit(AddToCartErrorState("Invalid product ID"));
+        return;
+      }
+
+      bool? isSuccess = await HomeRepo.addToCart(productId: event.productId!);
+
+      if (isSuccess == true) {
+        emit(AddToCartSuccessState());
+      } else {
+        emit(AddToCartErrorState("Add to cart failed"));
+      }
+    } catch (e) {
+      emit(AddToCartErrorState("An error occurred: ${e.toString()}"));
     }
-
-    bool? isSuccess = await HomeRepo.addToCart(
-      productId: event.productId!, 
-    );
-
-    if (isSuccess == true) {
-      emit(AddToCartSuccessState());
-    } else {
-      emit(AddToCartErrorState("Add to cart failed"));
-    }
-  } catch (e) {
-    emit(AddToCartErrorState("An error occurred: ${e.toString()}"));
   }
-}
-
 }

@@ -6,6 +6,7 @@ class GetBestSellerHomeEvents extends HomeEvents {}
 
 class GetWishListEvents extends HomeEvents {}
 
+class GetCartEvents extends HomeEvents {}
 class AddToWishListEvents extends HomeEvents {
   int? productId;
 
@@ -28,5 +29,4 @@ class AddToCartEvents extends HomeEvents {
 
 class RemoveFromCartEvents extends HomeEvents {
   int? cartItemId;
-  
 }

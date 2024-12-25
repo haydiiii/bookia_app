@@ -20,6 +20,7 @@ class _WishlistViewState extends State<WishlistView> {
   @override
   void initState() {
     super.initState();
+    // Initially load the wishlist data
     context.read<HomeBloc>().add(GetWishListEvents());
   }
 
@@ -32,11 +33,23 @@ class _WishlistViewState extends State<WishlistView> {
       body: BlocConsumer<HomeBloc, HomeStates>(
         listener: (context, state) {
           if (state is LoadingGetWishlistStates ||
-              state is DeleteFromWishlistLoadingState) {
+              state is DeleteFromWishlistLoadingState ||
+              state is AddToCartLoadingState) {
+            // Show loading dialog while performing actions
             showLoadingDialog(context);
           } else if (state is DeleteFromWishlistSuccessState) {
             Navigator.pop(context);
+            // Refresh the wishlist after removal
             context.read<HomeBloc>().add(GetWishListEvents());
+          } else if (state is AddToCartSuccessState) {
+            Navigator.pop(context);
+            showSuccessDialog(context, 'Product added to cart');
+            // Optionally refresh the wishlist or leave as is
+            context.read<HomeBloc>().add(GetWishListEvents());
+          } else if (state is AddToCartErrorState) {
+            Navigator.pop(context);
+            // Show error message if something goes wrong
+            showErrorDialog(context, state.error);
           } else if (state is SuccessGetWishlistStates ||
               state is EmptyGetWishlistStates) {
             Navigator.pop(context);
@@ -65,9 +78,7 @@ class _WishlistViewState extends State<WishlistView> {
               padding: const EdgeInsets.all(22),
               child: ListView.separated(
                 shrinkWrap: true,
-                itemCount:
-                    wishList!
-                        .length, // Set itemCount to 0 for empty state or update with data
+                itemCount: wishList!.length,
                 separatorBuilder: (BuildContext context, int index) {
                   return const Divider();
                 },
@@ -124,7 +135,16 @@ class _WishlistViewState extends State<WishlistView> {
                               style: getBodyTextStyle(context),
                             ),
                             const Gap(20),
-                            CustomButton(text: 'Add to cart', onPressed: () {}),
+                            CustomButton(
+                              text: 'Add to cart',
+                              onPressed: () {
+                                context.read<HomeBloc>().add(
+                                  AddToCartEvents(
+                                    productId: wishList[index].id,
+                                  ),
+                                );
+                              },
+                            ),
                             const Gap(10),
                           ],
                         ),
